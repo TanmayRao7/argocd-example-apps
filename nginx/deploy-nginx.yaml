@@ -43,7 +43,7 @@ spec:
   - port: 80
     protocol: TCP
     targetPort: 80
-    nodePort: 30080
+    nodePort: {{ .nodePort }} 
   selector:
     app: nginx
 status:
