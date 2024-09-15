@@ -1,13 +1,11 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  creationTimestamp: null
   name: nginx
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  creationTimestamp: null
   labels:
     app: nginx
   name: nginx
@@ -17,10 +15,8 @@ spec:
   selector:
     matchLabels:
       app: nginx
-  strategy: {}
   template:
     metadata:
-      creationTimestamp: null
       labels:
         app: nginx
     spec:
@@ -28,7 +24,6 @@ spec:
       - image: nginx
         name: nginx
         resources: {}
-status: {}
 ---
 apiVersion: v1
 kind: Service
@@ -43,7 +38,7 @@ spec:
   - port: 80
     protocol: TCP
     targetPort: 80
-    nodePort: {{ .nodePort }} 
+    nodePort: {{ .nodePort | default "32000" }}  # Use default value for testing
   selector:
     app: nginx
 status:
